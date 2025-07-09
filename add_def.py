@@ -17,6 +17,8 @@ class Student:
         else:
             return "Ошибка"
 
+    def __str__(self):
+        return f"Имя: {self.name}"
     
 class Mentor:
     def __init__(self, name, surname):
