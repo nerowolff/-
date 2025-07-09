@@ -6,7 +6,6 @@ class Student:
         self.finished_courses = []
         self.courses_in_progress = []
         self.grades = {}
-        self.average_score_=None
         
     def average_score(dict_):
             sum=0
@@ -41,6 +40,9 @@ class Student:
             return f'{self.name} {self.surname}имеет больший средний бал: {Student.average_score(self.grades)}'
         else:
             return f'{other.name} {other.surname} имеет больший средний бал: {Student.average_score(other.grades)}'
+        
+    def __lt__(self, other):
+        return Student.average_score(self.grades)>Student.average_score(other.grades)
     
 
 class Mentor:
@@ -67,6 +69,9 @@ class Lecturer(Mentor):
             return f'{self.name} {self.surname}имеет больший средний бал: {Student.average_score(self.grades)}'
         else:
             return f'{other.name} {other.surname} имеет больший средний бал: {Student.average_score(other.grades)}'
+        
+    def __lt__(self, other):
+        return Student.average_score(self.grades)<Student.average_score(other.grades)
     
 
 
@@ -103,4 +108,4 @@ reviewer.rate_hw(student,'Python', 3) # Оценка студента по ку�
  
 print(reviewer)
 print(lecturer)
-print(student)
+print(student>student)
