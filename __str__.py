@@ -108,4 +108,4 @@ reviewer.rate_hw(student,'Python', 3) # Оценка студента по ку�
  
 print(reviewer)
 print(lecturer)
-print(student>student)
+print(student)
