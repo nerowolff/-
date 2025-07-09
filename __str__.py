@@ -55,14 +55,6 @@ class Lecturer(Mentor):
         super().__init__(name,surname)
         self.grades={}
 
-    def rate_hw(self, student, course, grade):
-        if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
-            if course in student.grades:
-                student.grades[course] += [grade]
-            else:
-                student.grades[course] = [grade]
-        else:
-            return 'Ошибка'
     
     def __str__(self):
         return f"Имя: {self.name} \nФамилия: {self.surname}\nСредняя оценка за лекции: {Student.average_score(self.grades)}"
@@ -84,6 +76,15 @@ class Reviewer(Mentor):
 
     def __str__(self):
         return f"Имя: {self.name} \nФамилия: {self.surname}"
+    
+    def rate_hw(self, student, course, grade):
+        if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
+            if course in student.grades:
+                student.grades[course] += [grade]
+            else:
+                student.grades[course] = [grade]
+        else:
+            return 'Ошибка'
 
 lecturer = Lecturer('Иван', 'Иванов')
 reviewer = Reviewer('Пётр', 'Петров')
@@ -97,7 +98,7 @@ student.rate_lecture(lecturer, 'Python', 7)   # None
 student.rate_lecture(lecturer, 'Java', 8)     # Ошибка
 student.rate_lecture(lecturer, 'С++', 8)      # Ошибка
 student.rate_lecture(reviewer, 'Python', 6)   # Ошибка
-lecturer.rate_hw(student,'Python', 3) # Оценка студента по курсу Python
+reviewer.rate_hw(student,'Python', 3) # Оценка студента по курсу Python
 
  
 print(reviewer)
